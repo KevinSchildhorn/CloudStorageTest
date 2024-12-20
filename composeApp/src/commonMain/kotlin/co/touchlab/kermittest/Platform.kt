@@ -37,18 +37,6 @@ suspend fun authenticateImplicitWithAdc(project: String? = "lithe-tesla-445318-g
     // once, and can be reused for multiple requests.
 
     val storage: Storage = StorageOptions.newBuilder().setProjectId(project).build().service
-    val storageOptions = StorageOptions.newBuilder()
-        .setProjectId(project)
-        .setCredentials(
-
-
-            ServiceAccountCredentials.fromPkcs8(
-
-            ) .fromStream(
-                new FileInputStream("/path/to/my/key.json"))
-
-            Credentials())
-        .build()
 
     println("Buckets:")
     val buckets: Page<Bucket> = storage.list()

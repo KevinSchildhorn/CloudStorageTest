@@ -24,7 +24,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation("com.google.cloud:google-cloud-storage:2.35.0")
+            implementation(libs.google.cloud.storage)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -61,6 +61,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    packagingOptions {
+        exclude("META-INF/INDEX.LIST")
     }
 }
 

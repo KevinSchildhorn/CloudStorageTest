@@ -23,5 +23,5 @@ jobs:
       - id: 'upload-file'
         uses: 'google-github-actions/upload-cloud-storage@v2'
         with:
-          path: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png'
+          path: '../composeApp/src/commonMain/composeResources/drawable/compose-multiplatform.xml'
           destination: 'kevins_sample'

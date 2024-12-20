@@ -1,5 +1,8 @@
 name: cloudtest
 
+on:
+  workflow_dispatch:
+
 jobs:
   cloudtest:
     runs-on: ubuntu-latest

@@ -27,6 +27,7 @@ jobs:
         with:
           project_id: ${{ secrets.PROJECT_ID }}
           workload_identity_provider: ${{ secrets.WORKLOAD_ID_PROVIDER }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
 
       - id: 'upload-file'
         uses: 'google-github-actions/upload-cloud-storage@v2'

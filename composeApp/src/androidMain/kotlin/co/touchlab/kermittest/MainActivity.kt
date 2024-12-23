@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
 
         mainScope.launch(Dispatchers.IO) {
             //quickstart()
-            authenticateImplicitWithAdc()
+            //authenticateImplicitWithAdc()
 
         }
 

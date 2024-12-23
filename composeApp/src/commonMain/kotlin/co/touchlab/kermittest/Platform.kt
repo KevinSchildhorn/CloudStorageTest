@@ -1,13 +1,16 @@
 package co.touchlab.kermittest
 
+/*
 import com.google.api.gax.paging.Page
-import com.google.auth.Credentials
-import com.google.auth.oauth2.ServiceAccountCredentials
 import com.google.cloud.storage.Bucket
 import com.google.cloud.storage.Storage
 import com.google.cloud.storage.StorageOptions
 import java.io.IOException
+*/
+expect val platform:String
 
+
+/*
 fun quickstart(bucketName: String = "kevins_sample") {
     // [START storage_quickstart]
     // import com.google.cloud.storage.StorageOptions
@@ -44,4 +47,4 @@ suspend fun authenticateImplicitWithAdc(project: String? = "lithe-tesla-445318-g
         println(bucket.toString())
     }
     println("Listed all storage buckets.")
-}
+}*/

@@ -16,7 +16,6 @@ googleCloudStorage = "2.46.0"
 junit = "4.13.2"
 kotlin = "2.1.0"
 kmmbridge = "1.2.0"
-mavenPublish = "0.30.0"
 
 [libraries]
 google-cloud-storage = { module = "com.google.cloud:google-cloud-storage", version.ref = "googleCloudStorage" }

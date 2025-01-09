@@ -1,18 +1,29 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import co.touchlab.kmmbridge.artifactmanager.ArtifactManager
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+import com.google.cloud.storage.StorageOptions
+
+dependencies {
+    debugImplementation(compose.uiTooling)
+    implementation(libs.google.cloud.storage)
+}
+
+buildscript {
+    dependencies {
+        classpath(libs.google.cloud.storage)
+    }
+}
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kmmbridge)
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -85,7 +96,27 @@ android {
     }
 }
 
-dependencies {
-    debugImplementation(compose.uiTooling)
+
+
+
+class GoogleArtifactManager : ArtifactManager {
+
+    override fun deployArtifact(task: Task, zipFilePath: File, version: String): String {
+        val bucketName = "kevins_sample"
+        val storage = StorageOptions.getDefaultInstance().service
+        val responses = storage.testIamPermissions(
+            bucketName,
+            listOf("storage.buckets.get", "storage.objects.get", "storage.objects.create")
+        )
+        task.logger.log(LogLevel.INFO, responses.toString())
+        val bucket = storage.get(bucketName)
+        task.logger.log(LogLevel.INFO, bucket.name)
+        val blob = bucket.create(zipFilePath.name, zipFilePath.readBytes())
+        return blob.signUrl(4, TimeUnit.DAYS).path
+    }
+}
+
+kmmbridge {
+    artifactManager.set(GoogleArtifactManager())
 }
 

@@ -27,8 +27,12 @@ jobs:
         with:
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
 
-      - id: 'upload-file'
-        uses: 'google-github-actions/upload-cloud-storage@v2'
+      - id: 'kmmbridge publish'
         with:
           path: 'composeApp/build/XCFrameworks/debug/composeApp.xcframework'
           destination: 'kevins_sample'
+
+      - name: Publishing
+        env:
+          GRADLE_OPTS: -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=512m"
+        run: ./gradlew kmmBridgePublish -PENABLE_PUBLISHING=true --no-daemon --info --stacktrace

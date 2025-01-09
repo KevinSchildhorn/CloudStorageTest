@@ -118,5 +118,8 @@ class GoogleArtifactManager : ArtifactManager {
 
 kmmbridge {
     artifactManager.set(GoogleArtifactManager())
+    spm(swiftToolVersion = "5.8") {
+        iOS { v("14") }
+    }
 }
 

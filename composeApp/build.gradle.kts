@@ -1,6 +1,5 @@
 import co.touchlab.kmmbridge.artifactmanager.ArtifactManager
 import com.kevinschildhorn.gcartifactmanager.GoogleCloudArtifactManager
-import com.kevinschildhorn.gcartifactmanager.HelloWorld
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 

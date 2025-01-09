@@ -27,11 +27,6 @@ jobs:
         with:
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
 
-      - id: 'kmmbridge publish'
-        with:
-          path: 'composeApp/build/XCFrameworks/debug/composeApp.xcframework'
-          destination: 'kevins_sample'
-
       - name: Publishing
         env:
           GRADLE_OPTS: -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=512m"

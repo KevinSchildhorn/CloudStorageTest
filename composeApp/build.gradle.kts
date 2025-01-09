@@ -1,4 +1,6 @@
 import co.touchlab.kmmbridge.artifactmanager.ArtifactManager
+import com.kevinschildhorn.gcartifactmanager.GoogleCloudArtifactManager
+import com.kevinschildhorn.gcartifactmanager.HelloWorld
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
@@ -13,7 +15,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kmmbridge)
-    //id("demo-plugin")
+    id("com.kevinschildhorn.gcartifactmanager")
 }
 
 kotlin {
@@ -94,7 +96,8 @@ android {
 
 
 kmmbridge {
-    //artifactManager.set(GoogleArtifactManager())
+    val test = GoogleCloudArtifactManager("my_bucket")
+    artifactManager.set(test)
     spm(swiftToolVersion = "5.8") {
         iOS { v("14") }
     }

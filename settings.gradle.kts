@@ -2,7 +2,9 @@ rootProject.name = "KotlinProject"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
+    includeBuild("GCArtifactManager")
     repositories {
+        mavenLocal()
         google {
             mavenContent {
                 includeGroupAndSubgroups("androidx")
@@ -30,4 +32,4 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 include(":mylibrary")
-include(":GCArtifactManager")
+//include(":GCArtifactManager")

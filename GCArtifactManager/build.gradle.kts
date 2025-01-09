@@ -14,28 +14,25 @@
 
 plugins {
     `kotlin-dsl`
-    //id("org.jetbrains.kotlin.plugin.allopen")
-    id("java-gradle-plugin")
-    //id("com.gradle.plugin-publish") version "1.3.0"
+    //id("java-gradle-plugin")
 }
-/*
+
 @Suppress("UnstableApiUsage")
 gradlePlugin {
-    website = "https://github.com/touchlab/KMMBridge"
-    vcsUrl = "https://github.com/touchlab/KMMBridge.git"
-    description =
-        "KMMBridge is a set of Gradle tooling that facilitates publishing and consuming pre-built KMM (Kotlin Multiplatform Mobile) Xcode Framework binaries."
-    plugins {
-        register("kmmbridge-github-plugin") {
-            id = "co.touchlab.kmmbridge.github"
-            implementationClass = "co.touchlab.kmmbridge.github.KMMBridgeGitHubPlugin"
-            displayName = "KMMBridge/GitHub"
-            tags = listOf()
+   plugins {
+        register("google-plugin") {
+            id = "com.kevinschildhorn.gcartifactmanager"
+            implementationClass = "com.kevinschildhorn.gcartifactmanager.KMMBridgeGooglePlugin"
         }
     }
-}*/
+}
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
-    implementation(kotlin("stdlib"))
+    //implementation(kotlin("stdlib"))
     implementation("co.touchlab.kmmbridge:kmmbridge:1.2.0")
+    implementation("com.google.cloud:google-cloud-storage:2.46.0")
 }

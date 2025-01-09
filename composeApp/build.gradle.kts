@@ -95,7 +95,7 @@ android {
 
 
 kmmbridge {
-    val test = GoogleCloudArtifactManager("my_bucket")
+    val test = GoogleCloudArtifactManager("kevins_sample", "lithe-tesla-445318-g6")
     artifactManager.set(test)
     spm(swiftToolVersion = "5.8") {
         iOS { v("14") }

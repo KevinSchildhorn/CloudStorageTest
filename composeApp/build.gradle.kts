@@ -1,17 +1,11 @@
 import co.touchlab.kmmbridge.artifactmanager.ArtifactManager
+import com.kevinschildhorn.gcartifactmanager.GoogleCloudArtifactManager
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
-import com.google.cloud.storage.StorageOptions
 
 dependencies {
     debugImplementation(compose.uiTooling)
     implementation(libs.google.cloud.storage)
-}
-
-buildscript {
-    dependencies {
-        classpath(libs.google.cloud.storage)
-    }
 }
 
 plugins {
@@ -20,6 +14,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kmmbridge)
+    id("com.kevinschildhorn.gcartifactmanager")
 }
 
 kotlin {
@@ -96,28 +91,9 @@ android {
     }
 }
 
-
-
-
-class GoogleArtifactManager : ArtifactManager {
-
-    override fun deployArtifact(task: Task, zipFilePath: File, version: String): String {
-        val bucketName = "kevins_sample"
-        val storage = StorageOptions.getDefaultInstance().service
-        val responses = storage.testIamPermissions(
-            bucketName,
-            listOf("storage.buckets.get", "storage.objects.get", "storage.objects.create")
-        )
-        task.logger.log(LogLevel.INFO, responses.toString())
-        val bucket = storage.get(bucketName)
-        task.logger.log(LogLevel.INFO, bucket.name)
-        val blob = bucket.create(zipFilePath.name, zipFilePath.readBytes())
-        return blob.signUrl(4, TimeUnit.DAYS).path
-    }
-}
-
 kmmbridge {
-    artifactManager.set(GoogleArtifactManager())
+    val test = GoogleCloudArtifactManager("kevins_sample", "lithe-tesla-445318-g6")
+    artifactManager.set(test)
     spm(swiftToolVersion = "5.8") {
         iOS { v("14") }
     }

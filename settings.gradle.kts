@@ -2,6 +2,7 @@ rootProject.name = "KotlinProject"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
+    includeBuild("GCArtifactManager")
     repositories {
         google {
             mavenContent {

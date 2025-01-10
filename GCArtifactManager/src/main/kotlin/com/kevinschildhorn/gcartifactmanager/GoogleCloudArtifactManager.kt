@@ -43,6 +43,6 @@ class GoogleCloudArtifactManager(
         val blobInfo = BlobInfo.newBuilder(blobId).build()
         val blob = storage.createFrom(blobInfo, Paths.get(zipFilePath.path))
 
-        return "https://storage.googleapis.com/${bucketName}/${blob.name}"
+        return "https://storage.googleapis.com/${bucketName}/${blob.name}.zip"
     }
 }

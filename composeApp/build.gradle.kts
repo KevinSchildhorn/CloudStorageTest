@@ -91,12 +91,10 @@ android {
     }
 }
 
-
-
-
 kmmbridge {
     val test = GoogleCloudArtifactManager("kevins_sample", "lithe-tesla-445318-g6")
     artifactManager.set(test)
+    frameworkName = "KevinShared"
     spm(swiftToolVersion = "5.8") {
         iOS { v("14") }
     }

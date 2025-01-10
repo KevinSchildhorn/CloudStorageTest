@@ -31,13 +31,18 @@ class GoogleCloudArtifactManager(
     private val Project.kmmBridgeExtension get() = extensions.getByType<KmmBridgeExtension>()
 
     override fun deployArtifact(task: Task, zipFilePath: File, version: String): String {
-        val artifactName = "YourArtifactName-$version"
+        // The name in your bucket
+        val artifactName = "$frameworkName-$version"
 
-        val storage = StorageOptions.newBuilder().setProjectId(projectId).build().service
+        val storage = StorageOptions.newBuilder()
+            .setProjectId(projectId)
+            .build()
+            .service
+
         val blobId = BlobId.of(bucketName, artifactName)
         val blobInfo = BlobInfo.newBuilder(blobId).build()
         val blob = storage.createFrom(blobInfo, Paths.get(zipFilePath.path))
-        val url = "https://storage.googleapis.com/${bucketName}/${blob.name}"
-        return blob.signUrl(4, TimeUnit.DAYS).path
+
+        return "https://storage.googleapis.com/${bucketName}/${blob.name}"
     }
 }
